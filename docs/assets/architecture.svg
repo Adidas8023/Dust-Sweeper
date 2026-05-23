@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" font-family="'Inter','Helvetica Neue',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#0a0a0a"/>
+      <stop offset="1" stop-color="#060606"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#23d98d"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <style>
+      .box { fill:#111; stroke:#262626; stroke-width:1; rx:10; }
+      .box-accent { fill:#0d2622; stroke:#23d98d; stroke-width:1.5; rx:10; }
+      .box-okx { fill:#082236; stroke:#2775ca; stroke-width:1.5; rx:10; }
+      .box-circle { fill:#21130a; stroke:#f0a04b; stroke-width:1.5; rx:10; }
+      .title { font-size:14px; font-weight:700; fill:#f2f2f2; }
+      .subtitle { font-size:11px; fill:#8a8a8a; }
+      .label { font-size:11px; fill:#bbb; }
+      .small { font-size:10px; fill:#666; }
+      .arrow-line { stroke:#23d98d; stroke-width:1.5; fill:none; }
+      .arrow-gray { stroke:#666; stroke-width:1; fill:none; stroke-dasharray:4 3; }
+      .header { font-size:22px; font-weight:800; fill:#f2f2f2; }
+      .pill { fill:#1a1a1a; stroke:#2a2a2a; rx:10; }
+      .pill-text { font-size:10px; fill:#bbb; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="820" fill="url(#bg)"/>
+
+  <!-- Header -->
+  <text x="40" y="42" class="header">Dust Sweeper · Architecture</text>
+  <text x="40" y="62" class="subtitle">One core engine, two surfaces (AI + UI). 10 EVM chains + Solana. OKX DEX V6 + Circle CCTP V2.</text>
+
+  <!-- Tier 1: Entry Surfaces -->
+  <text x="40" y="110" class="title">① Entry Surfaces</text>
+
+  <!-- Claude Skill -->
+  <g transform="translate(40,124)">
+    <rect class="box-accent" width="280" height="100"/>
+    <text x="16" y="26" class="title">Claude Skill (MCP)</text>
+    <text x="16" y="46" class="label">SKILL.md trigger: 归集 / sweep / dust</text>
+    <text x="16" y="64" class="label">Tools: scan_dust · plan_sweep ·</text>
+    <text x="16" y="78" class="label">execute_sweep · get_supported_chains</text>
+    <text x="16" y="92" class="small">stdio JSON-RPC · @modelcontextprotocol/sdk</text>
+  </g>
+
+  <!-- Web UI -->
+  <g transform="translate(900,124)">
+    <rect class="box-accent" width="260" height="100"/>
+    <text x="16" y="26" class="title">Web UI</text>
+    <text x="16" y="46" class="label">Next.js 14 · localhost:3000</text>
+    <text x="16" y="64" class="label">4-step wizard · Phase tracker</text>
+    <text x="16" y="78" class="label">SSE progress · Confetti on success</text>
+    <text x="16" y="92" class="small">/api/scan · /api/plan · /api/execute</text>
+  </g>
+
+  <!-- Tier 2: Core engine -->
+  <text x="40" y="270" class="title">② Core Engine — @dust-sweeper/core (TypeScript, strict)</text>
+
+  <g transform="translate(40,284)">
+    <rect class="box" width="1120" height="120"/>
+    <text x="20" y="28" class="label" style="font-weight:600;fill:#23d98d">scan</text>
+    <text x="20" y="46" class="small">multi-chain parallel</text>
+    <text x="20" y="60" class="small">5-gate dust filter</text>
+    <text x="20" y="74" class="small">+ token catalog enrich</text>
+    <text x="20" y="88" class="small">→ DustInventory</text>
+
+    <line x1="200" y1="20" x2="200" y2="105" stroke="#262626"/>
+
+    <text x="220" y="28" class="label" style="font-weight:600;fill:#23d98d">plan</text>
+    <text x="220" y="46" class="small">per-chain step graph</text>
+    <text x="220" y="60" class="small">cost + slippage estimate</text>
+    <text x="220" y="74" class="small">CCTP-min check</text>
+    <text x="220" y="88" class="small">→ SweepPlan</text>
+
+    <line x1="400" y1="20" x2="400" y2="105" stroke="#262626"/>
+
+    <text x="420" y="28" class="label" style="font-weight:600;fill:#23d98d">execute</text>
+    <text x="420" y="46" class="small">chains in parallel</text>
+    <text x="420" y="60" class="small">approve → swap → burn</text>
+    <text x="420" y="74" class="small">→ attest → mint</text>
+    <text x="420" y="88" class="small">SSE progress events</text>
+
+    <line x1="620" y1="20" x2="620" y2="105" stroke="#262626"/>
+
+    <text x="640" y="28" class="label" style="font-weight:600;fill:#23d98d">signing</text>
+    <text x="640" y="46" class="small">EVM (viem · 10 chains)</text>
+    <text x="640" y="60" class="small">Solana (web3.js + bs58)</text>
+    <text x="640" y="74" class="small">env-key only · local</text>
+    <text x="640" y="88" class="small">non-custodial</text>
+
+    <line x1="820" y1="20" x2="820" y2="105" stroke="#262626"/>
+
+    <text x="840" y="28" class="label" style="font-weight:600;fill:#23d98d">demo mode</text>
+    <text x="840" y="46" class="small">auto-on if no keys</text>
+    <text x="840" y="60" class="small">fake inventory ($47)</text>
+    <text x="840" y="74" class="small">simulated tx hashes</text>
+    <text x="840" y="88" class="small">+ realistic timing</text>
+  </g>
+
+  <!-- Tier 3: External -->
+  <text x="40" y="450" class="title">③ External — Live blockchain interfaces</text>
+
+  <!-- OKX V6 -->
+  <g transform="translate(40,464)">
+    <rect class="box-okx" width="350" height="160"/>
+    <text x="16" y="26" class="title" style="fill:#5b97e0">OKX onchainOS · DEX API V6</text>
+    <text x="16" y="48" class="label">/dex/balance/all-token-balances-by-address</text>
+    <text x="16" y="64" class="small">→ portfolio (rawBalance + price)</text>
+    <text x="16" y="86" class="label">/dex/aggregator/all-tokens</text>
+    <text x="16" y="102" class="small">→ token catalog (decimals + logoUrl)</text>
+    <text x="16" y="124" class="label">/dex/aggregator/{quote,swap,approve-tx}</text>
+    <text x="16" y="140" class="small">→ swap calldata for any → USDC</text>
+  </g>
+
+  <!-- Circle CCTP -->
+  <g transform="translate(420,464)">
+    <rect class="box-circle" width="350" height="160"/>
+    <text x="16" y="26" class="title" style="fill:#f0a04b">Circle CCTP V2</text>
+    <text x="16" y="48" class="label">EVM · TokenMessenger.depositForBurn</text>
+    <text x="16" y="64" class="small">burn USDC, emit MessageSent log</text>
+    <text x="16" y="86" class="label">iris-api.circle.com/attestations/&lt;hash&gt;</text>
+    <text x="16" y="102" class="small">poll attestation (~30–60s)</text>
+    <text x="16" y="124" class="label">MessageTransmitter.receiveMessage</text>
+    <text x="16" y="140" class="small">mint USDC on destination chain</text>
+  </g>
+
+  <!-- Chains -->
+  <g transform="translate(800,464)">
+    <rect class="box" width="360" height="160"/>
+    <text x="16" y="26" class="title">Chain RPCs (Alchemy + fallback)</text>
+    <text x="16" y="48" class="label">10 EVM chains:</text>
+    <g transform="translate(16,58)">
+      <g><rect class="pill" x="0" y="0" width="60" height="18"/><text x="6" y="13" class="pill-text">Ethereum</text></g>
+      <g><rect class="pill" x="64" y="0" width="58" height="18"/><text x="70" y="13" class="pill-text">Arbitrum</text></g>
+      <g><rect class="pill" x="126" y="0" width="42" height="18"/><text x="132" y="13" class="pill-text">Base</text></g>
+      <g><rect class="pill" x="172" y="0" width="56" height="18"/><text x="178" y="13" class="pill-text">Polygon</text></g>
+      <g><rect class="pill" x="232" y="0" width="58" height="18"/><text x="238" y="13" class="pill-text">Optimism</text></g>
+      <g><rect class="pill" x="294" y="0" width="56" height="18"/><text x="300" y="13" class="pill-text">Avalanche</text></g>
+    </g>
+    <g transform="translate(16,82)">
+      <g><rect class="pill" x="0" y="0" width="58" height="18"/><text x="6" y="13" class="pill-text">Unichain</text></g>
+      <g><rect class="pill" x="62" y="0" width="44" height="18"/><text x="68" y="13" class="pill-text">Linea</text></g>
+      <g><rect class="pill" x="110" y="0" width="44" height="18"/><text x="116" y="13" class="pill-text">Sonic</text></g>
+      <g><rect class="pill" x="158" y="0" width="48" height="18"/><text x="164" y="13" class="pill-text">Monad</text></g>
+    </g>
+    <text x="16" y="122" class="label">+ Solana (SPL · web3.js):</text>
+    <g transform="translate(16,128)">
+      <g><rect class="pill" x="0" y="0" width="50" height="18"/><text x="6" y="13" class="pill-text">Solana</text></g>
+    </g>
+    <text x="16" y="156" class="small">Alchemy default · per-chain RPC override</text>
+  </g>
+
+  <!-- Tier 4: Data flow & dust journey -->
+  <text x="40" y="660" class="title">④ Dust journey (one chain pipeline)</text>
+
+  <g transform="translate(40,680)">
+    <!-- Pipeline -->
+    <g>
+      <rect x="0" y="0" width="170" height="44" rx="8" fill="#181818" stroke="#262626"/>
+      <text x="12" y="20" class="label">approve</text>
+      <text x="12" y="34" class="small">ERC20 allowance ↗ OKX</text>
+    </g>
+    <line x1="170" y1="22" x2="200" y2="22" class="arrow-line" marker-end="url(#arrow)"/>
+    <g transform="translate(200,0)">
+      <rect x="0" y="0" width="170" height="44" rx="8" fill="#181818" stroke="#262626"/>
+      <text x="12" y="20" class="label">swap</text>
+      <text x="12" y="34" class="small">OKX DEX → USDC (src)</text>
+    </g>
+    <line x1="370" y1="22" x2="400" y2="22" class="arrow-line" marker-end="url(#arrow)"/>
+    <g transform="translate(400,0)">
+      <rect x="0" y="0" width="170" height="44" rx="8" fill="#181818" stroke="#262626"/>
+      <text x="12" y="20" class="label">cctp burn</text>
+      <text x="12" y="34" class="small">USDC burned at src</text>
+    </g>
+    <line x1="570" y1="22" x2="600" y2="22" class="arrow-line" marker-end="url(#arrow)"/>
+    <g transform="translate(600,0)">
+      <rect x="0" y="0" width="190" height="44" rx="8" fill="#181818" stroke="#262626"/>
+      <text x="12" y="20" class="label">attestation</text>
+      <text x="12" y="34" class="small">Circle iris-api (~30–60s)</text>
+    </g>
+    <line x1="790" y1="22" x2="820" y2="22" class="arrow-line" marker-end="url(#arrow)"/>
+    <g transform="translate(820,0)">
+      <rect x="0" y="0" width="170" height="44" rx="8" fill="#181818" stroke="#262626"/>
+      <text x="12" y="20" class="label">cctp mint</text>
+      <text x="12" y="34" class="small">USDC minted at dest</text>
+    </g>
+    <line x1="990" y1="22" x2="1020" y2="22" class="arrow-line" marker-end="url(#arrow)"/>
+    <g transform="translate(1020,0)">
+      <rect x="0" y="0" width="100" height="44" rx="8" fill="#0d2622" stroke="#23d98d"/>
+      <text x="12" y="20" class="label" style="fill:#23d98d;font-weight:600">✓ done</text>
+      <text x="12" y="34" class="small">USDC at dest chain</text>
+    </g>
+  </g>
+
+  <!-- Connections from surfaces to core -->
+  <line x1="180" y1="224" x2="220" y2="284" class="arrow-line" marker-end="url(#arrow)"/>
+  <line x1="1030" y1="224" x2="980" y2="284" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Connection from core to externals -->
+  <line x1="200" y1="404" x2="200" y2="464" class="arrow-line" marker-end="url(#arrow)"/>
+  <line x1="600" y1="404" x2="600" y2="464" class="arrow-line" marker-end="url(#arrow)"/>
+  <line x1="980" y1="404" x2="980" y2="464" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Footer caption -->
+  <text x="40" y="800" class="small">env-key signed · runs locally · gitignored secrets · OKX V6 + Circle CCTP V2 · 21 unit tests</text>
+</svg>

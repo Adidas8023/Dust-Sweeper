@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "OKX Sans";
+  src: url("/fonts/OKXSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "OKX Sans";
+  src: url("/fonts/OKXSans-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "OKX Sans";
+  src: url("/fonts/OKXSans-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "OKX Sans Mono";
+  src: url("/fonts/OKXSansMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "OKX Sans Mono";
+  src: url("/fonts/OKXSansMono-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "OKX Sans Mono";
+  src: url("/fonts/OKXSansMono-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #000;
+  --panel: rgba(0, 0, 0, 0.5);
+  --panel-2: rgba(0, 0, 0, 0.62);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --t1: #fff;
+  --t2: rgba(255, 255, 255, 0.76);
+  --t3: rgba(255, 255, 255, 0.52);
+  --t4: rgba(255, 255, 255, 0.32);
+  --text: var(--t1);
+  --muted: var(--t3);
+  --dim: var(--t4);
+  --purple: #7204f8;
+  --green: #bcff2f;
+  --pink: #fa4dff;
+  --accent: var(--green);
+  --hot: rgba(188, 255, 47, 0.1);
+  --danger: #ff6b6b;
+  --hero-bg: transparent;
+  --hero-fg: #fff;
+  --mono: "OKX Sans Mono", "JetBrains Mono", "SF Mono", monospace;
+  --sans: "OKX Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  color: var(--text);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0;
+}
+
+html {
+  background: #000;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 74% 8%, rgba(250, 77, 255, 0.32), transparent 24%),
+    radial-gradient(circle at 20% 0%, rgba(188, 255, 47, 0.14), transparent 18%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.68) 78%, #000),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 0 1px,
+      transparent 1px 72px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 72px
+    ),
+    url("/bg4.png") right top / cover fixed no-repeat #000;
+}
+
+code,
+.font-mono {
+  font-family: var(--mono);
+}
+
+.x-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: clamp(16px, 1.25vw, 24px);
+  backdrop-filter: blur(2px);
+}
+
+.x-card-hot {
+  border-color: rgba(188, 255, 47, 0.34);
+  background:
+    linear-gradient(135deg, rgba(188, 255, 47, 0.12), rgba(114, 4, 248, 0.08)),
+    rgba(0, 0, 0, 0.62);
+  box-shadow:
+    0 0 0 1px rgba(188, 255, 47, 0.08) inset,
+    0 22px 80px rgba(114, 4, 248, 0.18);
+}
+
+.x-chip {
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.46);
+  border-radius: 999px;
+}
+
+.x-focus:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.x-input {
+  border: 1px solid var(--border-strong);
+  background: rgba(0, 0, 0, 0.58);
+  color: var(--text);
+  border-radius: 14px;
+}
+
+.x-input:focus {
+  border-color: var(--green);
+  outline: none;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}

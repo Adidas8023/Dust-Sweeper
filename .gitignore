@@ -1,0 +1,17 @@
+node_modules
+.env
+.env.local
+.env.*
+!.env.example
+dist
+.next
+coverage
+.turbo
+*.log
+.DS_Store
+*.pem
+*.key
+*.p12
+*.keystore
+*.secret
+secrets.*
