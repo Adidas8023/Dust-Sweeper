@@ -32,6 +32,7 @@
   - [Codebase](#codebase)
   - [Architecture](#architecture)
   - [Quick Start](#quick-start)
+  - [OnchainOS CLI Setup](#onchainos-cli-setup)
   - [Environment](#environment)
   - [Commands](#commands)
   - [MCP Server](#mcp-server)
@@ -44,6 +45,7 @@
   - [工作流程](#工作流程)
   - [代码结构](#代码结构)
   - [本地启动](#本地启动)
+  - [OnchainOS CLI 安装](#onchainos-cli-安装)
   - [环境变量](#环境变量)
   - [安全模型](#安全模型)
   - [已知限制](#已知限制)
@@ -175,6 +177,45 @@ If your environment refuses `localhost`, use:
 ```text
 http://127.0.0.1:3000
 ```
+
+### OnchainOS CLI Setup
+
+Live mode needs an authenticated `onchainos` CLI for portfolio data, quotes,
+approvals, and swap transaction generation. Demo mode does not need it.
+
+Recommended install:
+
+```bash
+npx skills add okx/onchainos-skills
+```
+
+Direct CLI install on macOS / Linux:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
+```
+
+Direct CLI install on Windows PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/okx/onchainos-skills/main/install.ps1 | iex
+```
+
+Verify the binary is available:
+
+```bash
+onchainos --version
+```
+
+If the binary was installed to `~/.local/bin` but your shell cannot find it,
+add this to your shell profile:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Optional fallback: if you do not install OnchainOS, configure your own OKX Web3
+API credentials in `.env`. OnchainOS is still the recommended live data source.
 
 ### Environment
 
@@ -358,6 +399,44 @@ http://localhost:3000
 ```text
 http://127.0.0.1:3000
 ```
+
+### OnchainOS CLI 安装
+
+Live 实盘模式需要本地已安装并可运行的 `onchainos` CLI，用来获取 portfolio、
+quote、approve 和 swap 交易数据。Demo 模式不需要安装。
+
+推荐安装方式：
+
+```bash
+npx skills add okx/onchainos-skills
+```
+
+macOS / Linux 直接安装 CLI：
+
+```bash
+curl -sSL https://raw.githubusercontent.com/okx/onchainos-skills/main/install.sh | sh
+```
+
+Windows PowerShell 直接安装 CLI：
+
+```powershell
+irm https://raw.githubusercontent.com/okx/onchainos-skills/main/install.ps1 | iex
+```
+
+检查是否安装成功：
+
+```bash
+onchainos --version
+```
+
+如果安装到了 `~/.local/bin` 但终端找不到命令，把下面这行加到 shell profile：
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+可选 fallback：如果不安装 OnchainOS，也可以在 `.env` 配置自己的 OKX Web3
+API 凭证。不过 Live 模式仍然推荐优先使用 OnchainOS。
 
 ### 环境变量
 
